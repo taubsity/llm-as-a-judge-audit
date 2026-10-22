@@ -1,6 +1,6 @@
 [project]
 name = "llm-judge-audit"
-version = "1.0.0"
+version = "1.0.1"
 description = "Cross-paradigm audit of large language model judges for clinical text evaluation"
 readme = "README.md"
 license = { file = "LICENSE" }

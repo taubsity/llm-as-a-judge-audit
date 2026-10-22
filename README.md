@@ -1,5 +1,7 @@
 # Cross-paradigm audit of LLM judges for clinical text evaluation
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23581371.svg)](https://doi.org/10.5281/zenodo.23581371)
+
 Code for auditing six open-weight LLM judges against expert ratings on four German clinical datasets across pointwise, pairwise and pass-or-fail evaluation.
 
 ## Usage
@@ -15,6 +17,8 @@ The clinical datasets contain protected health information and are available fro
 ## Citation
 
 Pakull, T. M. G. et al. Cross-paradigm audit of large language model judges for clinical text evaluation. *npj Digit. Med.* (2026). https://doi.org/10.1038/s41746-026-03443-2
+
+Received: 2 June 2026 / Accepted: 13 October 2026
 
 ```bibtex
 @article{pakull2026audit,

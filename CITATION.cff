@@ -1,7 +1,8 @@
 cff-version: 1.2.0
 message: If you use this code, please cite the article.
 title: Cross-paradigm audit of LLM judges for clinical text evaluation
-version: 1.0.0
+version: 1.0.1
+doi: 10.5281/zenodo.23581371
 license: MIT
 authors:
   - family-names: Pakull
