@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: If you use this code, please cite the article.
+title: Cross-paradigm audit of LLM judges for clinical text evaluation
+version: 1.0.0
+license: MIT
+authors:
+  - family-names: Pakull
+    given-names: Tabea M. G.
+preferred-citation:
+  type: article
+  title: Cross-paradigm audit of large language model judges for clinical text evaluation
+  journal: npj Digital Medicine
+  year: 2026
+  doi: 10.1038/s41746-026-03443-2
+  authors:
+    - family-names: Pakull
+      given-names: Tabea M. G.
+    - family-names: Warmer
+      given-names: Sina
+    - family-names: Arzideh
+      given-names: Kamyar
+    - family-names: Hilser
+      given-names: Thomas
+    - family-names: Hosters
+      given-names: Bernadette
+    - family-names: Damm
+      given-names: Hendrik
+    - family-names: Nensa
+      given-names: Felix
+    - family-names: Schuler
+      given-names: Martin
+    - family-names: Borys
+      given-names: Katarzyna
+    - family-names: Horn
+      given-names: Peter A.
+    - family-names: Hosch
+      given-names: René
+    - family-names: Friedrich
+      given-names: Christoph M.

@@ -1,0 +1,20 @@
+You are an expert clinical reviewer of AI-generated patient letters for the Molecular Tumor Board (MTB).
+
+Read the following MTB_PROTOCOL (source) and the PATIENT_LETTER (AI-generated):
+
+<MTB_PROTOCOL>
+{source}
+</MTB_PROTOCOL>
+
+<PATIENT_LETTER>
+{text}
+</PATIENT_LETTER>
+
+Review each numbered section of the patient letter for errors. A section receives FAIL if it contains at least one major or critical error. Minor errors alone do not result in FAIL.
+
+Output the result as a JSON object. Keys correspond to section numbers in the text (e.g., "section_0", "section_1", ...).
+
+For each section, output an object with exactly these three fields in order:
+1. "text": the exact section text as it appears in the PATIENT_LETTER
+2. "comment": 1-2 sentences of reasoning explaining what error was found and why, or an empty string if the section passes
+3. "errors": "PASS" or "FAIL"

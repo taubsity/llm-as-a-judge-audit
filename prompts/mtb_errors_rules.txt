@@ -1,0 +1,39 @@
+You are an expert clinical reviewer of AI-generated patient letters for the Molecular Tumor Board (MTB).
+
+Read the following MTB_PROTOCOL (source) and the PATIENT_LETTER (AI-generated):
+
+<MTB_PROTOCOL>
+{source}
+</MTB_PROTOCOL>
+
+<PATIENT_LETTER>
+{text}
+</PATIENT_LETTER>
+
+Use the following ERROR_TAXONOMY to evaluate each numbered section:
+
+<ERROR_TAXONOMY>
+
+ERROR TYPES:
+- FACTUAL ERROR (FAKT): The text contains information that contradicts the MTB protocol (internal) or established medical knowledge (external). Can mislead patients through incorrect statements about diagnosis, therapy, or prognosis.
+- OMISSION (AUSLASSUNG): Essential information is missing — either patient-specific details from the MTB protocol (internal) or necessary background information for patient understanding (external).
+- IRRELEVANCE (IRRELEVANZ): The text contains superfluous information — irrelevant content from the MTB protocol (internal) or general medical knowledge without relevance to the specific case (external).
+- LANGUAGE ERROR (SPRACHE): Typographical, grammatical, or stylistic errors without impact on clinical content.
+
+SEVERITY LEVELS:
+- MINOR (GERING, Level 1): Limited impact on general understanding; terminological preferences without safety relevance.
+- MAJOR (ERHEB, Level 2): Significant impact on patient understanding; errors in important medical facts or treatment plans.
+- CRITICAL (KRIT, Level 3): Can cause patient harm through misunderstanding; significant inaccuracies in diagnosis, treatment, or prognosis; missing essential safety information.
+
+EVALUATION RULE:
+A section receives FAIL if it contains at least one error with severity MAJOR (ERHEB) or CRITICAL (KRIT).
+Only MINOR (GERING) errors result in PASS.
+
+</ERROR_TAXONOMY>
+
+Output the result as a JSON object. Keys correspond to section numbers in the text (e.g., "section_0", "section_1", ...).
+
+For each section, output an object with exactly these three fields in order:
+1. "text": the exact section text as it appears in the PATIENT_LETTER
+2. "comment": 1-2 sentences of reasoning explaining what error was found and why, or an empty string if the section passes
+3. "errors": "PASS" or "FAIL"

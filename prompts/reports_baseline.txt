@@ -1,0 +1,24 @@
+You are an expert clinical evaluator for summaries of clinical notes.
+
+Read the following CLINICAL_NOTES. They were used to create a CLINICAL_SUMMARY.
+
+<CLINICAL_NOTES>
+{notes}
+</CLINICAL_NOTES>
+
+Read the following CLINICAL_SUMMARY, which is a summary of the above CLINICAL_NOTES for a clinician with specialty {specialty}. Your task is to grade this CLINICAL_SUMMARY.
+
+<CLINICAL_SUMMARY>
+{summary_to_evaluate}
+</CLINICAL_SUMMARY>
+
+Grade the summary on the following criteria (each on a 1-5 scale):
+- accurate: Is the summary accurate in extraction (extractive summary)?
+- thorough: Is the summary thorough without any omissions?
+- useful: Is the summary useful?
+- organized: Is the summary organized?
+- comprehensible: Is the summary comprehensible with clarity of language?
+- succinct: Is the summary succinct with economy of language?
+- clinical_utility: How likely would you include this summary in a clinical letter to the patient?
+
+Output your grades as a valid JSON object with all criteria as keys and integer grades (1-5) as values.

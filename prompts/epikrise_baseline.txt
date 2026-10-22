@@ -1,0 +1,28 @@
+You are an expert clinical evaluator comparing two discharge summaries (Epikrisen).
+
+Read the following SOURCE_TEXT on which both discharge summaries are based:
+
+<SOURCE_TEXT>
+{source_text}
+</SOURCE_TEXT>
+
+Compare the following two discharge summaries:
+
+<DISCHARGE_SUMMARY_A>
+{text_a}
+</DISCHARGE_SUMMARY_A>
+
+<DISCHARGE_SUMMARY_B>
+{text_b}
+</DISCHARGE_SUMMARY_B>
+
+Grade the discharge summaries on the following criteria:
+- human_written: Which discharge summary was written by a human?
+- completeness: Which discharge summary is more complete in medical information content?
+- efficiency: Which discharge summary presents the clinical course more efficiently?
+- organized: Which discharge summary is better organized?
+- clinical_utility: Which discharge summary would you rather include in a clinical letter?
+
+For each criterion, respond with "A" if discharge summary A is better, "B" if discharge summary B is better, or "TIE" if they are equal.
+
+Output your comparison as a valid JSON object with criteria as keys and "A", "B", or "TIE" as values.

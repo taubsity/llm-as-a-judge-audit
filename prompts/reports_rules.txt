@@ -1,0 +1,119 @@
+You are an expert clinical evaluator for summaries of clinical reports.
+
+Read the following CLINICAL_NOTES (report). They were used to create a CLINICAL_SUMMARY.
+
+<CLINICAL_NOTES>
+{notes}
+</CLINICAL_NOTES>
+
+Read the following CLINICAL_SUMMARY, which is a summary of the above CLINICAL_NOTES for a clinician with specialty {specialty}. Your task is to grade this CLINICAL_SUMMARY.
+
+<CLINICAL_SUMMARY>
+{summary_to_evaluate}
+</CLINICAL_SUMMARY>
+
+Use the following RUBRIC to grade the summary. Each dimension is evaluated independently.
+
+<RUBRIC>
+
+<accurate>
+    DESCRIPTION: Is the summary accurate in extraction (extractive summary)?
+    NOTE: Incorrect information can be fabrication (entirely made-up content not present in the original) or falsification (distorted facts). Each incorrect piece of information counts as a separate error.
+    EXCLUDE from this dimension: omissions of relevant information (covered by thorough).
+
+    GRADES:
+    1 = Very Inaccurate: Multiple major errors with overt falsifications or fabrications
+    2 = Inaccurate: A major error in assertion occurs with an overt falsification or fabrication
+    3 = Fair: At least one assertion contains a misalignment stated from a source note but wrong context
+    4 = Accurate: At least one assertion is misaligned to the provider source or timing but still factual
+    5 = Very Accurate: All assertions can be traced back to the notes
+</accurate>
+
+<thorough>
+    DESCRIPTION: The summary is complete and captures all clinically relevant information from the source.
+    NOTE: All essential information from the original report must be present. Both pertinent omissions (clearly important) and potentially pertinent omissions (may be relevant) are counted.
+    EXCLUDE from this dimension: correctness of extracted content (covered by accurate).
+
+    GRADES:
+    1 = Very Insufficient: More than one pertinent omission occurs
+    2 = Insufficient: One pertinent and multiple potentially pertinent omissions occur
+    3 = Fair: Only one pertinent omission occurs
+    4 = Thorough: Some potentially pertinent omissions occur
+    5 = Very Thorough: No pertinent or potentially pertinent omissions occur
+</thorough>
+
+<useful>
+    DESCRIPTION: All information in the summary is useful to the target provider.
+    NOTE: Assess whether all presented assertions are pertinent to the target clinician and appropriate in level of detail. Consider the clinician's specialty when judging relevance.
+    EXCLUDE from this dimension: how information is presented — order (organized), wording (comprehensible), conciseness (succinct).
+
+    GRADES:
+    1 = Not useful at all: No assertions are pertinent to the target user
+    2 = Little Useful: Some assertions are pertinent to the target user
+    3 = Fairly Useful: Assertions are pertinent but level of detail inappropriate (too detailed or not detailed enough)
+    4 = Useful: Not adding non-pertinent assertions but some assertions are potentially pertinent to target user
+    5 = Very Useful: Not adding non-pertinent assertions and level of detail is appropriate to targeted user
+</useful>
+
+<organized>
+    DESCRIPTION: The summary is well-formed and structured. Assertions are presented in logical order with coherent groupings.
+    NOTE: Assess both temporal order and systems/problem-based grouping. The structure should help the reader follow the clinical course.
+    EXCLUDE from this dimension: clarity of wording and language (comprehensible); conciseness (succinct).
+
+    GRADES:
+    1 = Very Chaotic: All assertions presented out of order and groupings incoherent (completely disorganized)
+    2 = Chaotic: Some assertions presented out of order OR grouping incoherent
+    3 = Fairly Organized: No change in order or grouping (temporal or systems/problem based) from original input
+    4 = Well Organized: Logical order or grouping (temporal or systems/problem based) for all assertions but not both
+    5 = Very Well Organized: All assertions made with logical order and grouping (temporal or systems/problem based) — completely organized
+</organized>
+
+<comprehensible>
+    DESCRIPTION: Clarity of language. The summary is clearly written and easy to understand by the target user.
+    NOTE: Assess language clarity, absence of ambiguity, correct use of technical terminology, and fluency. Language should be appropriate and familiar to the target clinician's specialty.
+    EXCLUDE from this dimension: redundancy and filler words (succinct).
+
+    GRADES:
+    1 = Very Unclear Language: Words and sentence structure are overly complex, inconsistent, with unfamiliar terminology
+    2 = Unclear Language: Any use of overly complex, inconsistent, or unfamiliar terminology to target user
+    3 = Fair Language: Unchanged choice of words from input with inclusion of overly complex terms when improvement possible
+    4 = Clear Language: Some inclusion of change in structure and terminology towards improvement
+    5 = Very Clear Language: Plain language completely familiar and well-structured to target user
+
+    ANSWER_OPTIONS:
+    1 = Very Unclear Language
+    2 = Unclear Language
+    3 = Fair Language
+    4 = Clear Language
+    5 = Very Clear Language
+</comprehensible>
+
+<succinct>
+    DESCRIPTION: Economy of language. The summary is concise without redundancy in syntax or semantics.
+    NOTE: Assess absence of unnecessary repetitions and filler words. The summary should be to the point.
+    EXCLUDE from this dimension: complex sentence structure or wrong word choice (comprehensible); relevance of content (useful).
+
+    GRADES:
+    1 = Very Long: Too wordy across all assertions with redundancy in syntax and semantics
+    2 = Long: More than one assertion has contextual semantic redundancy
+    3 = Medium Length: At least one assertion has contextual semantic redundancy or multiple syntactic assertions
+    4 = Short: No syntax redundancy in assertions and at least one could have been shorter in contextualized semantics
+    5 = Very Short: All assertions are captured with fewest words possible and without any redundancy in syntax or semantics
+</succinct>
+
+<clinical_utility>
+    DESCRIPTION: How likely would you include this summary in a clinical letter to the patient?
+    NOTE: Assess the overall suitability of the summary for clinical handoff and patient communication. This is a holistic judgment integrating accuracy, completeness, and appropriateness for the target clinician and specialty.
+
+    GRADES:
+    1 = Not at all: Summary is unsuitable for a clinical letter
+    2 = I would change many parts: Significant issues with accuracy, relevance, or clarity
+    3 = I would change some parts: Some issues with relevance, completeness, or clarity that require revision
+    4 = Likely: Minor issues only, summary is largely suitable
+    5 = Very Likely: Summary is accurate, complete, and fully appropriate for a clinical letter
+</clinical_utility>
+
+</RUBRIC>
+
+Output your grades as a valid JSON object with the following keys: "accurate", "thorough", "useful", "organized", "comprehensible", "succinct", "clinical_utility".
+All values should be integers between 1 and 5.

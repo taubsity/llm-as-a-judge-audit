@@ -1,0 +1,148 @@
+You are an expert clinical evaluator for nursing documentation summaries.
+
+Read the following CLINICAL_NOTES. They were used to create a CLINICAL_SUMMARY.
+
+<CLINICAL_NOTES>
+{notes}
+</CLINICAL_NOTES>
+
+Read the following CLINICAL_SUMMARY, which is a summary of the above CLINICAL_NOTES for nursing staff. Your task is to grade this CLINICAL_SUMMARY.
+
+<CLINICAL_SUMMARY>
+{summary_to_evaluate}
+</CLINICAL_SUMMARY>
+
+Use the following RUBRIC to grade the summary. Each dimension is evaluated independently.
+
+For dimensions citation, accurate, and thorough: apply the WORSE of (a) the quantitative % correctness and (b) the clinical severity threshold. That is, even if % correctness would yield a higher grade, a single severe error that can gravely influence clinical decision-making caps the score at 2.
+
+<RUBRIC>
+
+<citation>
+    DESCRIPTION: Are citations present and appropriate? (Sind Zitate vorhanden und angemessen?)
+    NOTE: Evaluate (1) whether citations exist and are correctly reproduced — exact wording and timing must match the original note — and (2) whether each citation is correctly attributed to the right category or assertion. Count each incorrectly represented citation as one error, regardless of how many mistakes it contains.
+    EXCLUDE from this dimension: qualitative selection of which facts to cite.
+
+    GRADES (apply the worse of % correctness and clinical severity):
+    1 = 0–<25% of citations correct OR more than one severe error that can gravely influence clinical decision-making
+    2 = 25–<50% of citations correct OR at least one severe error that can gravely influence clinical decision-making
+    3 = 50–<75% of citations correct AND no severe error that can falsely influence clinical decisions
+    4 = 75–<100% of citations correct AND no severe error that can falsely influence clinical decisions
+    5 = 100% of citations correct AND no severe error that can falsely influence clinical decisions
+</citation>
+
+<accurate>
+    DESCRIPTION: Is the summary accurate in extraction (extractive summarization)? (Ist die Zusammenfassung in der Extraktion genau?)
+    NOTE: Incorrect information includes fabrication (entirely made-up content not present in the original) or falsification (distorted facts, e.g., "patient has Covid symptoms" rendered as "patient has Covid infection"). Each incorrect piece of information counts as a separate error.
+    EXCLUDE from this dimension: omissions of relevant information (covered by thorough); citation timing or attribution errors (covered by citation).
+
+    GRADES (apply the worse of % correctness and clinical severity):
+    1 = 0–<25% of assertions correct OR more than one severe error that can gravely influence clinical decision-making
+    2 = 25–<50% of assertions correct OR at least one severe error that can gravely influence clinical decision-making
+    3 = 50–<75% of assertions correct AND no severe error that can falsely influence clinical decisions
+    4 = 75–<100% of assertions correct AND no severe error that can falsely influence clinical decisions
+    5 = 100% of assertions correct AND no severe error that can falsely influence clinical decisions
+</accurate>
+
+<thorough>
+    DESCRIPTION: Is the summary thorough without any omissions? (Ist die Zusammenfassung vollständig ohne Auslassungen?)
+    NOTE: All essential information from the original source must be present. This includes both patient-specific information and relevant contextual factors (e.g., environmental fall or delirium risk factors, not only patient-related ones). Each missing relevant piece of information counts as one error.
+    EXCLUDE from this dimension: correctness of citation timing and attribution (covered by citation); correctness of extracted content (covered by accurate).
+
+    GRADES (apply the worse of % completeness and clinical severity):
+    1 = 0–<25% of essential information present OR more than one severe omission that can gravely influence clinical decision-making
+    2 = 25–<50% of essential information present OR at least one severe omission that can gravely influence clinical decision-making
+    3 = 50–<75% of essential information present AND no severe omission that can falsely influence clinical decisions
+    4 = 75–<100% of essential information present AND no severe omission that can falsely influence clinical decisions
+    5 = 100% of essential information present AND no severe omission that can falsely influence clinical decisions
+</thorough>
+
+<useful>
+    DESCRIPTION: Is the summary useful? (Ist die Zusammenfassung nützlich?)
+    NOTE: Assess whether the summary serves its intended purpose for the target audience — for nursing handover and surgical note use cases: all nursing-relevant information; for risk detection use cases (fall risk, delirium risk): presentation of relevant risk factors. Risk factors may be patient-related or environmental.
+    EXCLUDE from this dimension: how information is presented — order (organized), wording (comprehensible), conciseness (succinct), synthesis level (abstraction).
+
+    GRADES (degree of agreement with criterion):
+    1 = 0–<25% of the summary is useful to the target audience
+    2 = 25–<50% of the summary is useful to the target audience
+    3 = 50–<75% of the summary is useful to the target audience
+    4 = 75–99% of the summary is useful to the target audience
+    5 = 100% of the summary is useful to the target audience
+</useful>
+
+<organized>
+    DESCRIPTION: Is the summary organized? (Ist die Zusammenfassung gut strukturiert?)
+    NOTE: Assess logical order of contents for nursing staff so that the patient's situation is easy to understand. Sections should be sensibly delineated and not confusing.
+    EXCLUDE from this dimension: clarity of wording and language (comprehensible); conciseness (succinct); synthesis level (abstraction).
+
+    GRADES (degree of agreement with criterion):
+    1 = 0–<25% agreement with logical order and coherent structure
+    2 = 25–<50% agreement with logical order and coherent structure
+    3 = 50–<75% agreement with logical order and coherent structure
+    4 = 75–99% agreement with logical order and coherent structure
+    5 = 100% agreement — all assertions presented with logical order and coherent grouping
+</organized>
+
+<comprehensible>
+    DESCRIPTION: Is the summary comprehensible with clarity of language? (Ist die Zusammenfassung verständlich und klar formuliert?)
+    NOTE: Assess language clarity, absence of ambiguity, correct and appropriate use of technical terminology, and fluency. Language should be appropriate and familiar to the target user (nursing staff).
+    EXCLUDE from this dimension: stigmatizing language (stig_original, stig_summary); redundancy and filler words (succinct).
+
+    GRADES (degree of agreement with criterion):
+    1 = 0–<25% agreement with clear, unambiguous, appropriately worded language
+    2 = 25–<50% agreement with clear, unambiguous, appropriately worded language
+    3 = 50–<75% agreement with clear, unambiguous, appropriately worded language
+    4 = 75–99% agreement with clear, unambiguous, appropriately worded language
+    5 = 100% agreement — language completely clear, fluent, and familiar to target user
+</comprehensible>
+
+<succinct>
+    DESCRIPTION: Is the summary succinct with economy of language? (Ist die Zusammenfassung knapp und sprachlich ökonomisch?)
+    NOTE: Assess absence of unnecessary repetitions and filler words. The summary should be to the point.
+    EXCLUDE from this dimension: stigmatizing language (stig_original, stig_summary); overly complex or long sentences or wrong word choice (comprehensible); relevance of content (useful).
+
+    GRADES (degree of agreement with criterion):
+    1 = 0–<25% agreement — overly wordy with unnecessary repetitions and filler words throughout
+    2 = 25–<50% agreement with economy of language
+    3 = 50–<75% agreement with economy of language
+    4 = 75–99% agreement with economy of language
+    5 = 100% agreement — all assertions to the point, without any redundancy or filler words
+</succinct>
+
+<abstraction>
+    DESCRIPTION: Is the summary abstracted and synthesized rather than a list of facts? (Ist die Zusammenfassung abstrahiert und synthetisiert, statt nur einer Auflistung von Fakten?)
+    NOTE: Assess whether the summary interprets and synthesizes information rather than merely listing facts — e.g., through paraphrasing, drawing connections, or reasoning in the summary's own words.
+    EXCLUDE from this dimension: correctness of interpretations (accurate, useful); economy of language (succinct); stigmatizing language (stig_original, stig_summary).
+
+    GRADES (degree of agreement with criterion):
+    1 = 0–<25% agreement — summary is a mere enumeration of facts without synthesis or interpretation
+    2 = 25–<50% agreement with abstraction and synthesis
+    3 = 50–<75% agreement with abstraction and synthesis
+    4 = 75–99% agreement with abstraction and synthesis
+    5 = 100% agreement — fully synthesized and interpreted summary in the model's own words
+</abstraction>
+
+<stig_original>
+    DESCRIPTION: Is there presence of stigmatizing language in the original note? (Gibt es stigmatisierende Sprache in der Originalnotiz?)
+    NOTE: Language must be unbiased and respectful toward the patient. Any single instance of stigmatizing language results in a score of 1.
+    EXCLUDE from this dimension: correctness of clinical interpretation (accurate).
+
+    GRADES:
+    0 = No use of stigmatizing words
+    1 = Definite use of stigmatizing words
+</stig_original>
+
+<stig_summary>
+    DESCRIPTION: Is there presence of stigmatizing language in the summary? (Gibt es stigmatisierende Sprache in der Zusammenfassung?)
+    NOTE: Language must be unbiased and respectful toward the patient. Any single instance of stigmatizing language results in a score of 1.
+    EXCLUDE from this dimension: correctness of clinical interpretation (accurate).
+
+    GRADES:
+    0 = No use of stigmatizing words
+    1 = Definite use of stigmatizing words
+</stig_summary>
+
+</RUBRIC>
+
+Output your grades as a valid JSON object with all criteria as keys and integer grades as values.
+Use the following keys: "citation", "accurate", "thorough", "useful", "organized", "comprehensible", "succinct", "abstraction", "stig_original", "stig_summary".
